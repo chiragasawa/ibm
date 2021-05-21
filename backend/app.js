@@ -81,9 +81,9 @@ app.post("/payments/razorpay/amount", async (req, res) => {
 
 //       ------------->>  Varification route
 
-app.post("payments/razorpay/varification", async (req, res) => {
+app.post("payments/razorpay/varification", (req, res) => {
   console.log(req.body);
-
+  console.log('varification is called')
   const crypto = require("crypto");
 
   const shasum = crypto.createHmac(
@@ -98,7 +98,7 @@ app.post("payments/razorpay/varification", async (req, res) => {
   if (digest === req.headers["x-razorpay-signature"]) {
     console.log("request is legit");
     // process it
-    db.collection("razorpay").add(req.body);
+  db.collection("razorpay").add(req.body);
   } else {
     // pass it
   }

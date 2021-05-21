@@ -212,6 +212,6 @@ app.use("/", (req, res) => {
   res.sendFile(path.resolve(dirname, "index.html"));
 });
 
-app.listen(3000, () => {
-  console.log("server => 3000");
+app.listen(process.env.PORT, () => {
+  console.log(`server => ${procees.env.PORT}`);
 });

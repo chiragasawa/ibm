@@ -8,16 +8,7 @@ const request = require("request");
 const shortid = require("shortid");
 const Razorpay = require("razorpay");
 
-// Firebase
 
-const admin = require("firebase-admin");
-const serviceAccount = require("./serviceAuthKey.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-const db = admin.firestore();
-
-// -----------------
 
 //  express
 
@@ -33,6 +24,17 @@ app.use(
 );
 
 // --------------------------
+
+// Firebase
+
+const admin = require("firebase-admin");
+admin.initializeApp({
+  credential: admin.credential.cert(JSON.parse(Buffer.from(process.env.GOOGLE_CONFIG_BASE64, 'base64').toString('ascii'))),
+});
+const db = admin.firestore();
+
+// -----------------
+
 
 // ENV check
 
@@ -116,11 +118,9 @@ app.post("/payments/paypal/create-payment", (req, res) => {
       },
       body: {
         intent: "sale",
-
         payer: {
           payment_method: "paypal",
         },
-
         transactions: [
           {
             amount: {
@@ -129,13 +129,11 @@ app.post("/payments/paypal/create-payment", (req, res) => {
             },
           },
         ],
-
         redirect_urls: {
           return_url: "https://localhost:3000/payment/success",
           cancel_url: "https://localhost:3000/payment/failed",
         },
       },
-
       json: true,
     },
     function (err, response) {

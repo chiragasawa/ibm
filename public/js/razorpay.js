@@ -92,10 +92,10 @@ const options = {
   currency: 'INR',
   name: 'FundMed',
   description: 'Donation',
-  image: 'https://covid19resources.herokuapp.com/logo',
+  image: 'http://localhost:3000/logo',
   // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
   handler: function (response) {
-    window.location.replace("https://covid19resources.herokuapp.com/payments/success")
+    window.location.replace("http://localhost:3000/payments/success")
   },
   prefill: {
 
@@ -107,7 +107,7 @@ const options = {
 }
 let rzp1 = new Razorpay(options)
 rzp1.on('payment.failed', function (response) {
-  window.location.replace("https://covid19resources.herokuapp.com/payments/failed")
+  window.location.replace("http://localhost:3000/payments/failed")
 })
 document.getElementById('rzp-button1').onclick = async function (e) {
   e.preventDefault()

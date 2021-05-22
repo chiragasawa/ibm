@@ -130,8 +130,8 @@ app.post("/payments/paypal/create-payment", (req, res) => {
           },
         ],
         redirect_urls: {
-          return_url: "http://localhost:3000/payment/success",
-          cancel_url: "http://localhost:3000/payment/failed",
+          return_url: "https://covid19resources.herokuapp.com/payment/success",
+          cancel_url: "https://covid19resources.herokuapp.com/payment/failed",
         },
       },
       json: true,

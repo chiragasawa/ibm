@@ -207,6 +207,10 @@ app.get("/payments/failed", (req, res) => {
   // res.sendStatus(200);
  res.sendFile(path.resolve(dirname, "payfail.html"))
 });
+app.get("/logo", (req, res) => {
+  // res.sendStatus(200);
+ res.sendFile(path.resolve(dirname, "fundmud.jpeg"))
+});
 app.use("/", (req, res) => {
   // res.send('Welcome to Backend')
   res.sendFile(path.resolve(dirname, "index.html"));

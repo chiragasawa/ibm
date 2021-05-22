@@ -80,18 +80,25 @@
 const options = {
   key: 'rzp_test_mJwqE5M7qVenay', // Enter the Key ID generated from the Dashboard
   amount: (
-    100 *500
-  ).toString(), // Amount is in cu/rrency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      100 *
+    parseInt(
+      (
+        (document.querySelector('.amount-preset > span.active') == null
+          ? null
+          : document.querySelector('.amount-preset > span.active')
+            .textContent) || document.getElementById('custom-donation').value
+      ).replace('₹', '')
+  )).toString(), // Amount is in cu/rrency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
   currency: 'INR',
-  name: 'Acme Corp',
+  name: 'FundMed',
   description: 'Donation',
-  image: 'https://example.com/your_logo',
+  image: 'https://covid19resources.herokuapp.com/logo',
   // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
   handler: function (response) {
     window.location.replace("https://covid19resources.herokuapp.com/payments/success")
   },
   prefill: {
-  name:"chirag asawa"
+
   },
   
   theme: {
@@ -105,8 +112,15 @@ rzp1.on('payment.failed', function (response) {
 document.getElementById('rzp-button1').onclick = async function (e) {
   e.preventDefault()
   options.amount = (
-    100 *500
-  ).toString()
+    100 *
+  parseInt(
+    (
+      (document.querySelector('.amount-preset > span.active') == null
+        ? null
+        : document.querySelector('.amount-preset > span.active')
+          .textContent) || document.getElementById('custom-donation').value
+    ).replace('₹', '')
+  )).toString()
   options.order_id =await axios.post('/payments/razorpay/amount',{amount:options.amount}).then((info,err)=>{
     console.log(info);
     // console.log("err",err.data)

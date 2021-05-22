@@ -130,8 +130,8 @@ app.post("/payments/paypal/create-payment", (req, res) => {
           },
         ],
         redirect_urls: {
-          return_url: "https://localhost:3000/payment/success",
-          cancel_url: "https://localhost:3000/payment/failed",
+          return_url: "https://covid19resources.herokuapp.com/payment/success",
+          cancel_url: "https://covid19resources.herokuapp.com/payment/failed",
         },
       },
       json: true,
@@ -200,12 +200,12 @@ app.post("/payments/paypal/execute-payment/", function (req, res) {
   );
 });
 app.get("/payments/success", (req, res) => {
-  res.sendStatus(200);
-  res.send("success");
+  // res.sendStatus(200);
+ res.sendFile(path.resolve(dirname, "paysuccess.html"))
 });
 app.get("/payments/failed", (req, res) => {
-  res.sendStatus(200);
-  res.send("failed");
+  // res.sendStatus(200);
+ res.sendFile(path.resolve(dirname, "payfail.html"))
 });
 app.use("/", (req, res) => {
   // res.send('Welcome to Backend')
